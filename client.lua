@@ -87,8 +87,9 @@ AddEventHandler('erp_towscirpt:tow', function()
                                         local distanceBetweenVehicles =
                                             GetDistanceBetweenCoords(GetEntityCoords(targetVehicle),
                                                 GetEntityCoords(vehicle), false)
-
+                            
                                         if distanceBetweenVehicles <= Config.VehicleRange then
+                                                SetEntityAsMissionEntity(targetVehicle)
                                             if Config.OnlyStoppedEngines and IsVehicleStopped(targetVehicle) then
 
                                                 NetworkRequestControlOfEntity(targetVehicle)
@@ -104,9 +105,8 @@ AddEventHandler('erp_towscirpt:tow', function()
                                                     GetEntityBoneIndexByName(vehicle, 'bodyshell'), xoffset, yoffset,
                                                     zoffset, 0, 0, 0, 1, 1, 0, 1, 0, 1)
                                                     vehicleOnTowTruck = NetworkGetNetworkIdFromEntity(targetVehicle)
-
                                                 ESX.ShowNotification(_U('vehicle_attached'))
-
+                                            
                                             elseif Config.OnlyStoppedEngines and not IsVehicleStopped(targetVehicle) then
                                                 ESX.ShowNotification(_U('engine_not_stopped'))
                                             else
